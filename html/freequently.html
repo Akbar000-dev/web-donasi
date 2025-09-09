@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pusat Bantuan</title>
+
+  <!-- ✅ Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ✅ Header */
+    .header {
+      background-color: #ff9ca3;
+      color: #fff;
+      padding: 12px 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    .header i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    /* ✅ Kontainer isi */
+    .faq-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-content {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .faq-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    /* ✅ Item FAQ */
+    .faq-item {
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+      cursor: pointer;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-item .question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .faq-item .answer {
+      font-size: 14px;
+      color: #555;
+      margin-top: 8px;
+      display: none;
+    }
+    .faq-item.active .answer {
+      display: block;
+    }
+    .faq-item.active .question {
+      color: #ff9ca3;
+    }
+
+    /* ✅ Navigasi bawah menempel */
+    .nav-bottom {
+      background: #fff;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .nav-bottom a {
+      color: #555;
+      text-decoration: none;
+      font-size: 12px;
+      flex: 1;
+    }
+    .nav-bottom a.active {
+      color: #ff9ca3;
+      font-weight: 600;
+    }
+    .nav-bottom i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="faq-container">
+    <!-- ✅ Header -->
+    <div class="header">
+      <i class="bi bi-arrow-left"></i> Pusat Bantuan
+    </div>
+
+    <!-- ✅ Isi FAQ -->
+    <div class="faq-content">
+      <div class="faq-title">Hi! ada yang bisa kami bantu?</div>
+
+      <div class="faq-item">
+        <div class="question">
+          <span>Apa yang harus dilakukan ketika lupa kata sandi</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+        <div class="answer">Silakan reset kata sandi melalui email yang terdaftar.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="question">
+          <span>Apakah donasi saya bisa di refund</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+        <div class="answer">Donasi yang sudah terkirim tidak dapat dikembalikan.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="question">
+          <span>Apakah saya wajib konfirmasi setelah transfer donasi</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+        <div class="answer">Ya, mohon lakukan konfirmasi agar donasi dapat diverifikasi.</div>
+      </div>
+
+      <div class="faq-item active">
+        <div class="question">
+          <span>Apakah donasi saya tersalurkan 100%</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="answer">Ya donasi anda akan disalurkan 100%.</div>
+      </div>
+    </div>
+
+    <!-- ✅ Navigasi bawah menyatu -->
+    <div class="nav-bottom">
+      <a href="belum login .html">
+        <i class="bi bi-house-door"></i>
+        Home
+      </a>
+      <a href="freequently.html" class="active">
+        <i class="bi bi-question-circle"></i>
+        Bantuan
+      </a>
+      <a href="akun.html">
+        <i class="bi bi-person"></i>
+        Akun
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ JS FAQ Toggle -->
+  <script>
+    document.querySelectorAll(".faq-item .question").forEach(item => {
+      item.addEventListener("click", function() {
+        const parent = this.parentElement;
+        document.querySelectorAll(".faq-item").forEach(faq => {
+          faq.classList.remove("active");
+          faq.querySelector("i").classList.remove("bi-chevron-down");
+          faq.querySelector("i").classList.add("bi-chevron-right");
+        });
+        parent.classList.add("active");
+        const icon = this.querySelector("i");
+        icon.classList.remove("bi-chevron-right");
+        icon.classList.add("bi-chevron-down");
+      });
+    });
+  </script>
+
+</body>
+</html>

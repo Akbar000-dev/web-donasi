@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donasi</title>
+
+  <!-- ✅ Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .donasi-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #ff9ca3;
+      color: #fff;
+      padding: 12px 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    .header i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    .donasi-content {
+      padding: 20px 18px;
+      flex: 1;
+    }
+
+    .donasi-content h6 {
+      font-size: 14px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .donation-option {
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      background: #fff;
+      font-size: 13px;
+    }
+    .donation-option input {
+      margin-right: 8px;
+      accent-color: #ff9ca3;
+    }
+    .donation-option:hover {
+      border-color: #ff9ca3;
+    }
+
+    .custom-input {
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      text-align: center;
+      padding: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 12px;
+      margin-bottom: 22px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .custom-input:hover {
+      border-color: #ff9ca3;
+    }
+    .custom-input.active {
+      border: 2px solid #ff9ca3;
+      color: #ff9ca3;
+    }
+
+    .btn-donasi {
+      background-color: #ff9ca3;
+      color: #fff;
+      border-radius: 40px;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="donasi-container">
+    <!-- ✅ Header -->
+    <div class="header">
+      <i class="bi bi-arrow-left"></i> Donasi
+    </div>
+
+    <!-- ✅ Isi donasi -->
+    <div class="donasi-content">
+      <h6 class="fw-bold">Berapa Donasi Yang Akan Kamu Berikan?</h6>
+
+      <form id="donasiForm">
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="30000" id="donasi30">
+          <label for="donasi30">Rp30.000</label>
+        </div>
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="50000" id="donasi50">
+          <label for="donasi50">Rp50.000</label>
+        </div>
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="80000" id="donasi80">
+          <label for="donasi80">Rp80.000</label>
+        </div>
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="100000" id="donasi100">
+          <label for="donasi100">Rp100.000</label>
+        </div>
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="200000" id="donasi200">
+          <label for="donasi200">Rp200.000</label>
+        </div>
+        <div class="donation-option">
+          <input type="radio" name="donasi" value="500000" id="donasi500">
+          <label for="donasi500">Rp500.000</label>
+        </div>
+
+        <!-- Custom Input -->
+        <p class="text-center text-muted mt-3 mb-2" style="font-size:12px;">
+          Atau Masukan Jumlah Yang Diinginkan
+        </p>
+        <div class="custom-input" id="customDonasi">Rp750.000</div>
+
+        <!-- Tombol submit -->
+        <button type="submit" class="btn btn-donasi">📤 Kirim Donasi</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const customBox = document.getElementById('customDonasi');
+    const form = document.getElementById('donasiForm');
+    const radios = form.querySelectorAll('input[type=radio]');
+
+    customBox.addEventListener('click', () => {
+      radios.forEach(r => r.checked = false);
+      customBox.classList.toggle('active');
+    });
+
+    radios.forEach(r => {
+      r.addEventListener('change', () => {
+        customBox.classList.remove('active');
+      });
+    });
+
+    // ✅ Saat klik "Kirim Donasi"
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let nominal = null;
+
+      radios.forEach(r => {
+        if (r.checked) nominal = r.value;
+      });
+
+      if (customBox.classList.contains('active')) {
+        nominal = 750000;
+      }
+
+      if (nominal) {
+        // Simpan nominal ke localStorage
+        localStorage.setItem("donasiNominal", nominal);
+
+        // Pindah ke halaman konfirmasi
+        window.location.href = "konfirmasi donasi.html";
+      } else {
+        alert("Silakan pilih nominal donasi!");
+      }
+    });
+  </script>
+
+</body>
+</html>
